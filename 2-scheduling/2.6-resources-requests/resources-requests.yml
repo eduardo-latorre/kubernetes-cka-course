@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 8080
+      resources: # Resources request under the container
+        requests: 
+          memory: "1Gi"
+          cpu: 1
+        limits:
+          memory: "2Gi" 
+          cpu: 2
+# Allows to set the cpu and memory required for a specific POD so the scheduler place the POD where it fits
+# Also can set limits of the resources
+# If the POD runs out of limit, the POD gets terminated OOM
+# Limits has to be set only for specific app, since user services might experience issues

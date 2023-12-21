@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    app: myapp
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx      # SHOULD BE MATCHED FROM SERVICE SELECTOR
+        tier: frontend  # SHOULD BE MATCHED FROM SERVICE SELECTOR
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+      tier: frontend
+# Used for service demo only

@@ -1,0 +1,15 @@
+apiVersion:
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  nodeSelector:
+    size: Large
+# To better achive this use NodeAfinity
+# This is used for scheduler to know where to create the pod on all the nodes
+# All the nodes have a label to stablish if it's large
+# To label a node
+# - kubectl label nodes <node-name> size=<size>

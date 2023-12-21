@@ -1,0 +1,15 @@
+# This is just an example template, images won't work
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: myapp
+    image: myapp-image
+    ports:
+    - containerPorts: 8080
+
+  - name: logs
+    image: log-agent
+# Containers is an array so it can have multiple containers

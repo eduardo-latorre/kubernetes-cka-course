@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - targetPort: 80
+      port: 80
+  selector:
+    app: nginx      # SHOULD MATCH THE POD LABELS
+    tier: frontend  # SHOULD MATCH THE POD LABELS
+# Service asumes an IP in which other services can access using that IP, not POD's IPs
+# Is the default type
+# kubectl create -f 05-services/service-clusterip.yml 
+# minikube service my-service-clusterip

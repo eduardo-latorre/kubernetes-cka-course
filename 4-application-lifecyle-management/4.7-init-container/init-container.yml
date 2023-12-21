@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: orange
+spec:
+  containers:
+  - command:
+    - sh
+    - -c
+    - echo The app is running! && sleep 3600
+    image: busybox:1.28
+    name: orange-container
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - sleep 2;
+    image: busybox
+    name: init-myservice
+# The initContainers must be completed before the hosting container starts
+# If it fails, k8s will restart it til it works
+# In the Lab I realized that it is just for running other proccesses but I still not sure why it can be used

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+# Retricts Nodes to accept certain PODS
+# There're 3 effects:
+# NoSchedule: No schedule pod on the node
+# PreferNoSchudule: Will try to avoid placing the POD on a node
+# NoExecute: Will not be scheduled and remove running pods from the node if it's not tolerated
+
+# Commands
+# kubectl taint node <node-name> key=value:taint-effect
+# Master Node has a toleration to no accept PODS
+# kubectl describe node kubemaster | grep Taint
+# kubectl taint nodes <node> <taint-name>-
+
+# Lab
+# kubectl taint node node01 spray=mortein:NoSchedule
+# kubectl run mosquito --image=nginx
+# kubectl run bee --image=nginx --dry-run=client --output=yaml
+# kubectl describe node controlplane | grep Taints
+# Removed taint
+# kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+# kubectl describe pods mosquito | grep Node

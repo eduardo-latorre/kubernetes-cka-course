@@ -1,0 +1,21 @@
+# This is just a example template
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    # Command are arrays
+    # All of them must be strings
+    command: ["sleep"] #   --> This is the entrypoint (command to be executed) in Docker
+    # Or
+    #command: 
+    # - "sleep"
+    args: ["5"]    #   --> This is the cmd (comand's option) in Docker
+# Commands from k8s overwrite commands from Dockerfile 
+
+# Lab
+# Passing arguments through a command
+# - kubectl run webapp-green --image=kodekloud/webapp-color -- --color green

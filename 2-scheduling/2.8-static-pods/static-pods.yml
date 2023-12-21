@@ -1,0 +1,15 @@
+# Static PODs are created in controlplane
+# The Kubelet can manage a POD independently
+# The definition POD files should be under /etc/kubernetes/manifests which kubelet monitors all the time
+# Only works for POD, not deployments or replicasets
+# To check where the static pods are, go to kubelet.service file and check ExceStart... --config=kubeconfig.yml
+# and then, in the kubeconfig.yml add "staticPodPath: /etc/kubernetes/manifests"
+# These files can be seen by kubectl as static PODS, but cant be deleted or updated but from their original files. If it's delete using kubectl it will be reacreated
+
+#Lab
+# - kubectl get pods --all-namespaces | grep controlplane
+# To get all namespaces use A
+# - kubectl get pods -A 
+# To get the definition of static PODs
+# - /var/lib/kubelet/config.yaml -> /etc/kubernetes/manifests
+# - ssh <node-ip>

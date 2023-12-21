@@ -1,0 +1,29 @@
+# This is an example template
+apiVersion: v1
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: my-scheduler
+    plugins:
+      score:
+        disabled:
+          - name: TaintToleration
+        enabled:
+          - name: MyCustomPluginA
+          - name: MyCustomPluginB
+
+  - schedulerName: my-scheduler-1
+    plugins:
+      preScore:
+        disabled:
+          - name: '*'
+      score:
+        disabled:
+          - name: '*'
+
+  - schedulerName: my-scheduler-1
+# scheduler there're ways to sort and they required plugins
+# scheduling queue:
+# - priority -> PrioritySort
+# - filtering -> NodeResourceFit, NodeName, NodeUnchedudable, 
+# - scoring the node with free space -> NodeResourcesFit, ImageLocality
+# - binding -> DefaultBinder

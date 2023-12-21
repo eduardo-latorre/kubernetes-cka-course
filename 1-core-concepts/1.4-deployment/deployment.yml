@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    app: myapp
+    tier: frontend
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx # SHOULD MATCH
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx # SHOULD MATCH
+      tier: frontend
+# kubectl create -f 04-deployment/deployment.yml
+# kubectl get deploy
+# To create a template based on the given parameters
+# kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --dry-run=client --replicas=2 --output=yaml

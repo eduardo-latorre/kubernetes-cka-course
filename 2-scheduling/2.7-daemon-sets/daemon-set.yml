@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: monitoring-daemon
+spec:
+  selector:
+    matchLabels:
+      app: monitoring-agent
+  template:
+    metadata:
+      labels:
+        app: monitoring-agent
+    spec:
+      containers: 
+        - image: monitoring-agent
+          name: monitoring-agent
+# Are like replicaset but runs one replica on each node
+# Used mainly for agents to monitor pod in a node
+# The componet KubeProxy is based on this
+# - kubectl get daemonsets
+# - kubectl describe daemonsets monitoring-daemon
+
+# Labs
+# kubectl get daemonsets --all-namespaces
+# kubectl describe daemonsets kube-flannel-ds --namespace=kube-flannel
+# kubectl create deploy elasticsearch --image=registry.k8s.io/fluentd-elasticsearch:1.20 -n=kube-system --dry-run=client - o yaml > my-daemontset.yml
+# kubectl delete deploy elasticsearch --namespace=kube-system

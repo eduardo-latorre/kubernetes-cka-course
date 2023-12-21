@@ -1,0 +1,31 @@
+apiVersion:
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In # Makes sure the POD has the values like: NotIn | Exists | In and many others
+            values: # Matching labels
+            - Large
+            - Medium
+# Limit pod placement 
+# requiredDuringSchedulingIgnoredDuringExecution
+# DuringScheduling, during the POD creation it will the the POD that matches exactly the labels on a Node otherwise it won't create it
+# preferredDuringSchedulingIgnoredDuringExecution
+# DuringScheduling, scheduler will try to find the best option that matches the labels, it will create it on any node otherwise if nothing matches
+
+# Lab:
+# - kubectl get nodes --show-labels
+# Add label to a Node:
+# - kubectl label nodes node01 color=blue
+# - kubectl create deployment blue --replicas=3 --image=nginx
+# - kubectl create deployment blue --replicas=3 --image=nginx --dry-run=client --output=yaml
+# Also the edit command can be used to rapidly make changes to the template

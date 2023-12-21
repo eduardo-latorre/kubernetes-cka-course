@@ -1,0 +1,24 @@
+apiVersion: v1
+metadata:
+  name: app-config
+data:
+  key: default
+# Used to stored multiple env vars and values
+# imperative: 
+# - kubectl create configmap <name-configmap> --from-literal=<key>=<value>
+# - kubectl create configmap <name-configmap> --from-file=<file-name>.properties
+
+# Lab:
+# - kubectl replace --force -f /tmp/kubectl-edit-819717846.yaml
+# - kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=disregard
+
+  name: webapp-color
+  namespace: default
+  resourceVersion: "888"
+  uid: 69bdf3ca-cfb6-497d-bf32-55829233f1b8
+spec:
+  containers:
+    env:
+    - name: APP_COLOR
+      value: blue
+    image: kodekloud/webapp-color

@@ -1,0 +1,3 @@
+# Limits and requests can't be done on a running POD so it has to be recreated
+# identify where your intent of update the file gets stored and do the replace command
+# kubectl replace --force -f <template-of-running-pod> 

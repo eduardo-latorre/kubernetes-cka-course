@@ -1,0 +1,26 @@
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc: # Encryption provider
+          keys:
+            - name: key1
+              secret: H/LJqTpVJhNxH11302nU41uCreEz6wJ+FgUDQGBLoB8=
+      - identity: {}
+
+# Generate a 32-byte random key and base64 encode it
+# - head -c 32 /dev/urandom | base64
+# result: H/LJqTpVJhNxH11302nU41uCreEz6wJ+FgUDQGBLoB8=
+
+
+# Using etcdctl
+# etcdctl version
+# kubectl create secret generic my-secret --from-literal=key1=supersecret
+
+# ETCDCTL_API=3 etcdctl \
+#   --cert=/Users/eduardo.latorre/.minikube/ca.crt \
+#   --key=/Users/eduardo.latorre/.minikube/ca.key \
+#   --cacert=/Users/eduardo.latorre/.minikube/ca.crt \
+#   get /registry/secrets/default/my-secret

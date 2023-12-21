@@ -1,0 +1,4 @@
+# Allows to group things together and filter
+# kubectl get pods --selector app=App1
+# kubectl get all --selector env=prod
+# kubectl get pods --selector env=prod,tier=frontend,bu=finance

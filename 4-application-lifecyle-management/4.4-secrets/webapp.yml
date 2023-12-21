@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    name: webapp-pod
+  type: NodePort
+  ports:
+  - nodePort: 30080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-pod
+  name: webapp-pod
+spec:
+  containers:
+  - envFrom:
+    - secretRef:
+        name: db-secret
+    image: kodekloud/simple-webapp-mysql
+    name: webapp
+# minikube service webapp-service

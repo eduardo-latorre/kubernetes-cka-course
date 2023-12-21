@@ -1,0 +1,24 @@
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app
+    image: "debian-slim:latest"
+    # Calling the ConfigMap
+    # 1 using single env:
+    env:
+    - name: DB_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: DB_HOST
+    # 2 using env
+    envFrom:
+    - configMapRef:
+        name: app-config
+  # 3 using volumes
+  volumes:
+  - name: app-config-volume
+    configMap:
+      name: app-config 

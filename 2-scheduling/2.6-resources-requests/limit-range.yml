@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: LimitRangeName
+spec:
+  limits:
+  - type: Container
+    default:
+      cpu: 100m
+      memory: 512Mi
+    defaultRequest:
+      cpu: 100m
+      memory: 256Mi
+    max:
+      cpu: 200m
+      memory: 512Mi
+    min:
+      cpu: 100m
+      memory: 256Mi
+# Set at namespace level
+# To stablish request and limit
+# It will only affect new POD not existing ones
+# There's a limit for volumes too

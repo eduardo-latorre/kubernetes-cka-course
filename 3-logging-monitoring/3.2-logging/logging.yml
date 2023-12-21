@@ -1,0 +1,12 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: event-simulator
+spec: 
+  containers:
+    - name: event-simulator
+      image: kodekloud/event-simulator
+# This image just produces random logs
+# To check the logs :
+# - kubectl logs -f event-simulator
+# If there're two container on the same pod, specify the container name which you want to see the logs

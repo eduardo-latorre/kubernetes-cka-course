@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replicaset
+  labels:
+    app: myapp
+    tier: frontend
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx # SHOULD MATCH
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx # SHOULD MATCH
+      tier: frontend
+
+# kubectl create -f 03-replicaset/replicaset.yml
+# kubectl get replicaset
+
+# How to scale replicas
+# 1.- Update yaml file and run:
+#     kubectl replace -f 03-replicaset/replicaset.yml
+# 2.- Run a scale command, it CHANGE THE FILE
+#     kubectl scale --replicas=5 -f 03-replicaset/replicaset.yml
+# 3.- Run a scale command, it WONT CHANGE THE FILE
+#     kubectl scale --replicas=5 replicaset my-replicaset

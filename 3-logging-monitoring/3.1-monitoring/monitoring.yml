@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 4
+  selector:
+    matchLabels:
+      tier: frontend
+# There're third parties services that allows to monitor k8s
+# Metric server for one k8s cluster, in memory, can't stored data, so that's why is suggested to use other monitors (third party)
+# To allow this in minikube
+# minikube addons enable metrics-server 
+# Other way to use is by cloning https://github.com/kodekloudhub/kubernetes-metrics-server.git and inside of the repo run:
+# - kubectl create -f . 
+# - kubectl top pod
+# - kubectl top node
+
+# Lab
+# - git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+# In the repo
+# - kubectl create -f .
+# kubectl top node
+# kubectl top pod
